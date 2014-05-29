@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(Lato400.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(Lato700.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('OpenSans Regular'), local('OpenSans-Regular'), url(OpenSans-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('OpenSans Bold'), local('OpenSans-Bold'), url(OpenSans-Bold.ttf) format('ttf');
+}
+$app-font: OpenSans, "Helvetica Neue", sans-serif;
+$lato: Lato, "Helvetica Neue", sans-serif;

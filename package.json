@@ -1,0 +1,43 @@
+{
+  "name": "GIMC",
+  "version": "0.0.0",
+  "description": "Images' manual classifier for Google Images",
+  "main": "app.js",
+  "private": true,
+   "window": {
+    "title": "GIMC",
+    "toolbar": false,
+    "frame": false,
+    "width": 1100,
+    "height": 618,
+    "min_width": 990,
+    "min_height": 556,
+    "resizable": true,
+    "position": "center"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VerAx1/gimc"
+  },
+  "author": "Sebastian Vera <u.verainf@gmail.com>",
+  "contibutors": [
+    {
+      "name": "Rodrigo Fuenzalida",
+      "email": "rfuenzalidc87@gmail.com"
+    }
+  ],
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/VerAx1/gimc/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-node-webkit-builder": "~0.1.21",
+    "grunt-contrib-compass": "~0.8.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "load-grunt-tasks": "~0.4.0"
+  }
+}
