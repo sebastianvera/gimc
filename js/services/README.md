@@ -20,3 +20,8 @@ client.search(params, function (err, images) {
   console.log(images);
 });
 </code></pre>
+
+### Object params
+
+1. 'keyword': query to seach in google.
+2. 'pages': number of pages to looking for. If pages is not given the module assume one page to search
