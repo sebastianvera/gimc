@@ -51,9 +51,9 @@ module.exports = {
       if (pages === 0) {
         return callback(null, images);
       } else {
-        syncRequest();
+        return syncRequest();
       }
     };
-    syncRequest();
+    return syncRequest();
   }
 };
