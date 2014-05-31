@@ -18,7 +18,7 @@ module.exports = {
       var error = 'Params must be object, read README for more information.';
       return callback(error, null);
     }
-    if (!(params.pages != null)) pages = 0;
+    if (!params.pages) pages = 0;
     else pages =  params.pages;
 
     var i, images, URLS, url;
