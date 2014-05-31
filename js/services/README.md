@@ -27,13 +27,12 @@ client.search(params, function (err, images) {
 2. 'pages': number of pages to looking for. If pages is not given the module assume one page to search
 
 ### Response
-<pre><code>
-{
+<pre><code>[{
   width: 'width of the image',
   height: 'height of the image',
   url: 'resourse url',
   name: 'name of the file'
-}
+}]
 </code></pre>
 
 ### Upcoming
