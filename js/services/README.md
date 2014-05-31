@@ -1,6 +1,9 @@
 # Google Image Service
 
 This code is based on another implamentation of google image api, for more details go to [link](https://github.com/vdemedes/node-google-images)
+
+This module extract multiples pages of google search api, this tasks are syncronous.
+
 # Usage
 <p>Example of module google-image</p>
 
@@ -37,4 +40,4 @@ client.search(params, function (err, images) {
 
 ### Upcoming
 
-* Method to download the resourse (image) and write into local drive.
+* writeImage(): Method to download the resourse (image) and write into local drive.
