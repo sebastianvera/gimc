@@ -21,8 +21,9 @@ module.exports = function (grunt) {
                 options: {
                     version: '0.9.2',
                     build_dir: './build', // Where the build version of my node-webkit app is saved
-                    // mac_icns: './src/app/images/popcorntime.icns', // Path to the Mac icon file
-                    mac: true
+                    mac_icns: './src/app/images/popcorntime.icns', // Path to the Mac icon file
+                    mac: true,
+                    win: false
                 },
                 src: ['**', './css/**', './fonts/**', './images/**', './js/**', './node_modules/**', '!./node_modules/grunt*/**', '!./node_modules/bower/**', './Config.rb', './index.html', './package.json', './vendor' ]
             }

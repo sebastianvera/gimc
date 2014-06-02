@@ -2,6 +2,7 @@
 @import 'loaders';
 
 $bgc: #f6f6f6;
+$silver: #bababa;
 $font-size: 30px;
 $app-font: OpenSans, "Helvetica Neue", sans-serif;
 $lato: Lato, "Helvetica Neue", sans-serif;
@@ -14,6 +15,20 @@ body {
   font-size: $font-size;
   line-height: $font-size;
   font-family: $app-font;
+}
+
+.selected {
+  background-color: rgba(55, 167, 118, 0.71);
+  padding: 2px;
+}
+
+#preload {
+  display: none;
+}
+
+.transparent {
+  background-color: rgba(darken($bgc, 30%), 0.3);
+  filter: -webkit-filter-blur(5px);
 }
 
 %centered {

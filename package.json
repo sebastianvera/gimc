@@ -2,9 +2,9 @@
   "name": "GIMC",
   "version": "0.0.0",
   "description": "Images' manual classifier for Google Images",
-  "main": "app.js",
+  "main": "index.html",
   "private": true,
-   "window": {
+  "window": {
     "title": "GIMC",
     "toolbar": false,
     "frame": false,
@@ -39,5 +39,8 @@
     "grunt-contrib-compass": "~0.8.0",
     "grunt-contrib-watch": "~0.6.1",
     "load-grunt-tasks": "~0.4.0"
+  },
+  "dependencies": {
+    "fs-extra": "~0.9.1"
   }
 }
