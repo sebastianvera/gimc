@@ -2,7 +2,7 @@ var client = require('./google-image');
 
 var params = {
   'keyword': 'heineken logo lata',
-  'pages': 2
+  'pages': 12
 };
 
 client.search(params, function (err, images) {
@@ -11,4 +11,5 @@ client.search(params, function (err, images) {
     return;
   }
   console.log(images);
+  console.log(images.length);
 });

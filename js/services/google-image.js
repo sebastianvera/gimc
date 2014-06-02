@@ -6,7 +6,7 @@ var API_URL = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' 
 
 module.exports = {
   search: function (params, callback) {
-    var query, pages;
+    var query, pages; // Each page returns 4 images
     if (typeof params === 'object') {
       if (Object.keys(params).length === 0) {
         var error = 'Object is empty, read README for more information.';
@@ -40,11 +40,13 @@ module.exports = {
 
       for (j = 0, len = items.length; j < len; j++) {
         item = items[j];
+        var name = _.last(item.url.split('/'));
         images.push({
           width: item.width,
           height: item.height,
           url:  item.url,
-          name: _.last(item.url.split('/'))
+          name: name,
+          unique_name: name+"|"+item.url.split('/')[2]
         });
       }
       pages--;

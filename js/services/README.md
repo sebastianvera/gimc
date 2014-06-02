@@ -1,10 +1,13 @@
 # Google Image Service
 
-This code is based on another implamentation of google image api, for more details go to [link](https://github.com/vdemedes/node-google-images)
+This code is based on another implementation of google image api,
+ for more details go to [link](https://github.com/vdemedes/node-google-images)
+
 # Usage
+
 <p>Example of module google-image</p>
 
-<pre><code>
+```js
 var client = require('./google-image');
 
 var params = {
@@ -19,22 +22,23 @@ client.search(params, function (err, images) {
   }
   console.log(images);
 });
-</code></pre>
+```
 
 ### Object params
 
-1. 'keyword': query to search in google.
-2. 'pages': number of pages to looking for. If pages is not given the module assume one page to search
+1. 'keyword': Google's image query.
+2. 'pages': Number of pages to look for. If page's value is not given, the value will be set to 1.
 
 ### Response
-<pre><code>[{
-  width: 'width of the image',
-  height: 'height of the image',
-  url: 'resourse url',
-  name: 'name of the file'
+```js
+[{
+  width: "image's width",
+  height: "image's height",
+  url: 'resource url',
+  name: "file's name"
 }]
-</code></pre>
+```
 
 ### Upcoming
 
-* Method to download the resourse (image) and write into local drive.
+* Method to download the resource (image) and write into local drive.
