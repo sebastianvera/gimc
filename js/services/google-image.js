@@ -18,7 +18,7 @@ module.exports = {
       var error = 'Params must be object, read README for more information.';
       return callback(error, null);
     }
-    if (!params.pages) pages = 0;
+    if (!(params.pages != null)) pages = 0;
     else pages =  params.pages;
 
     var i, images, URLS, url;
@@ -57,5 +57,13 @@ module.exports = {
       }
     };
     return syncRequest();
+  },
+  writeImage: function(path, url, callback) {
+    var stream;
+    stream = fs.createWriteStream(path);
+    stream.on('close', function() {
+      return callback();
+    });
+    return request.get(url).pipe(stream);
   }
 };

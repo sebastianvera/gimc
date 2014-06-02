@@ -41,4 +41,4 @@ client.search(params, function (err, images) {
 
 ### Upcoming
 
-* Method to download the resource (image) and write into local drive.
+* writeImage(): Method to download the resource (image) and write into local drive.
