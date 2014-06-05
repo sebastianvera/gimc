@@ -8,7 +8,6 @@ var app = app || {};
       className: 'class',
       template: _.template($('#template-image-class').html()),
       initialize: function () {
-        // this.model.on('change:active', this.render, this);
         this.model.on('change:images', this.updateSize, this);
         this.model.on('change:active', this.updateActive, this);
         this.model.on('hide', this.remove, this);
@@ -21,15 +20,12 @@ var app = app || {};
         }
       },
       updateSize: function () {
-        console.log("Update size: "+this.model.imageSize());
         if (this.model.imageSize() > 0) {
           this.$('span').html("Class "+this.model.get('name')+" - total: "+
                               this.model.imageSize());
         }
       },
       render: function () {
-        console.log("Rendered class view "+this.model.get('name'));
-        console.log("Images class "+this.model.get('name')+": "+this.model.get('images').length);
         if (this.model.get('images').length < 1) {
           this.$el.remove();
           return this;
@@ -55,6 +51,11 @@ var app = app || {};
       this.collection.on('add', this.checkSaveButton, this);
       this.collection.on('remove', this.remove, this)
       this.collection.on('highlight', this.highlight, this);
+      this.collection.on('enableButton', this.enableButton, this);
+      this.$el.append($('#template-save-button').html());
+    },
+    events: {
+      'click #save-button': 'save'
     },
     remove: function (model) {
       this.collection.remove(model);
@@ -71,20 +72,33 @@ var app = app || {};
     },
     checkSaveButton: function () {
       if (this.collection.length > 0) {
-        console.log("enabled");
-        $('#save-button').removeClass('disabled');
+        this.enableButton();
       } else {
-        console.log("disabled");
-        $('#save-button').addClass('disabled');
+        this.disableButton();
       }
+    },
+    highlightByName: function (unique_name) {
+      if (this.collection.length < 1) return true;
+
+      var model = this.collection.findByName(unique_name);
+      if (model) {
+        this.collection.activateOnly(model);
+      } else {
+        this.collection.deactivateAll();
+      }
+    },
+    enableButton: function () {
+      $('#save-button').removeClass('disabled');
+    },
+    disableButton: function(){
+      $('#save-button').addClass('disabled');
+    },
+    blurButton: function () {
+      $('#save-button').blur();
     },
     highlight: function (c) {
       console.log("hightlight "+c.get('name'));
       this.collection.deactivateCollection(c);
-    },
-    render: function() {
-      // this.$el.empty();
-      // this.addAll();
     },
     reset: function() {
       this.$el.empty();
@@ -95,10 +109,15 @@ var app = app || {};
     },
     save: function() {
       if (this.collection.length > 0) {
-      console.log("Save images with their respectiva classes");
+        this.blurButton();
+        this.disableButton();
+        this.collection.save();
       } else {
         console.log("No images to save");
       }
-    }
+    },
+    close: function () {
+      this.undelegateEvents();  
+    },
   });
 }());

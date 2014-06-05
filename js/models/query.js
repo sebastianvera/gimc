@@ -6,7 +6,7 @@ var fs = require('fs-extra');
 
   app.Query = Backbone.Model.extend({
       defaults: {
-        query: 'coca cola lata',
+        query: 'coca cola lat',
         placeholder: 'Coca Cola lata'
       },
       initialize: function () {

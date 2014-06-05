@@ -1,4 +1,6 @@
 var app = app || {};
+var fs = require('fs-extra');
+var client = require('./js/services/google-image');
 
 (function(){
 
@@ -13,8 +15,6 @@ var app = app || {};
       this.set({images: [options]})
     },
     addImage: function (image) {
-      app.hola = app.hola || [];
-      app.hola = app.hola.concat(this.toJSON());
       this.set({active: true});
       var imageExists = _.any(this.get('images'), function(i){
         return i.unique_name == image.unique_name;
@@ -36,6 +36,22 @@ var app = app || {};
     },
     imageSize: function() {
       return this.get('images').length;
+    },
+    save: function (folder) {
+      // console.log("Save images for "+this.get('name'));
+      folder = folder.concat("/"+this.get('name')+"/");
+      fs.ensureDirSync(folder);
+
+      _.each(this.get('images'), function(image) {
+        var filePath = folder.concat(image.unique_name);
+        fs.exists(filePath, function(exists){
+          if (exists) {
+            // console.log("Already exists "+filePath);
+          } else {
+            client.writeImage(filePath, image.url, function(){console.log("Tudu bem");});
+          }
+        });
+      });
     }
   });
 
@@ -67,7 +83,14 @@ var app = app || {};
         this.push(imageClass);
       }
     },
-    have: function (unique_name) {
+    findByName: function (unique_name) {
+      var model = this.filter(function (imageClass) {
+        var images = imageClass.get('images');
+        var imageNames = _.pluck(images, 'unique_name');
+        return _.contains(imageNames, unique_name);
+      })
+
+      return model[0];
     },
     unclassifyExisting: function (className, image) {
       var classes = this.filter(function(c){
@@ -87,12 +110,29 @@ var app = app || {};
         }
       });
     },
+    activateOnly: function (model) {
+      this.deactivateCollection(model);
+      model.set({active: true});
+    },
     deactivateCollection: function(newModel) {
       this.forEach(function (model) {
         if (model.cid != newModel.cid && model.get('active')) {
           model.set({active: false})
         }
       });
-    }
+    },
+    save: function() {
+      if (!app.query) return true;
+
+      var folder = app.query.model.getDirectory();
+      this.forEach(function (imageClass) {
+        imageClass.save(folder);
+      });
+    },
+    deactivateAll: function () {
+      this.forEach(function (model) {
+        model.set({active: false});
+      });
+    },
   });
 })();

@@ -12,7 +12,6 @@ body {
   background-color: $bgc;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-size: $font-size;
   line-height: $font-size;
   font-family: $app-font;
@@ -57,13 +56,14 @@ h3 {
   text-align: center;
   & img {
     width: auto;
-    height: 400px;
+    height: 300px;
   }
 }
 
 .classes {
+  $height: 250px;
   width: 100%;
-  height: 280px;
+  height: $height;
   margin-top: 30px;
   padding: 0 30px;
   text-align: center;
@@ -74,10 +74,10 @@ h3 {
     margin: 0 10px;
     display: inline-block;
     max-width: 20%;
-    max-height: 280px;
+    max-height: $height - 50px;
     overflow: hidden;
     background-color: $bgc;
-    -webkit-transition: background-color 0.7s linear;
+    -webkit-transition: background-color 0.5s linear;
     span {
       font-size: 0.5em;
       display: block;
@@ -92,7 +92,12 @@ h3 {
   }
   .active {
     // background-color: rgba($green, 0.71);
-    background-color: rgba($green, 0.2);
+    background-color: rgba($green, 0.35);
     padding: 2px;
   }
+}
+
+#save-button {
+  margin: 2px auto 4px auto;
+  display: block;
 }

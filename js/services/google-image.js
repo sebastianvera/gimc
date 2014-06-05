@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var request = require('request');
+var fs = require('fs-extra');
 
 var API_URL = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' +
               '{{query}}&start={{page}}';
@@ -46,7 +47,7 @@ module.exports = {
           height: item.height,
           url:  item.url,
           name: name,
-          unique_name: name+"|"+item.url.split('/')[2]
+          unique_name: item.url.split('/')[2]+"|"+name
         });
       }
       pages--;

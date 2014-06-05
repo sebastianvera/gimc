@@ -12,7 +12,6 @@ $(function () {
   app.appView = new app.MainView();
   app.appView.render();
   Mousetrap.bind('right', function(){
-    console.log("next image");
     app.appView.nextImage();
   });
   Mousetrap.bind('left', function () {

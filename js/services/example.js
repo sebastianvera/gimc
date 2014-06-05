@@ -12,4 +12,8 @@ client.search(params, function (err, images) {
   }
   console.log(images);
   console.log(images.length);
+  console.log(images[0]);
+  client.writeImage("classes/"+images[0].unique_name, images[0].url, function(){
+    console.log("Todo la raja");
+  });
 });

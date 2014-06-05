@@ -13,7 +13,7 @@ var app = app || {};
       this.$query = queryView;
       this.$el.append(queryView.render().el);
       this.$classes = this.$('#image-classes')
-
+      app.query = queryView;
 
       // Set events
       this.$query.on('startLoading', this.startLoading);
@@ -26,9 +26,11 @@ var app = app || {};
       this.images = images;
       this.$classes.empty();
       this.imageClasses = new app.ImageClassList();
+      if (this.imageClassesView) {
+        this.imageClassesView.close();
+      }
       this.imageClassesView = new app.ImageClassListView({collection: this.imageClasses});
 
-      app.caca = this.imageClassesView;
       var image = new app.Image(images[0]);
       this.renderImage(image);
 
@@ -53,6 +55,7 @@ var app = app || {};
       this.$imageView = imageView;
 
       this.updateCounter();
+      this.imageClassesView.highlightByName(image.get('unique_name'));
       this.$imageView.render();
     },
     updateCounter: function(){

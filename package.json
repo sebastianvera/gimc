@@ -9,9 +9,9 @@
     "toolbar": false,
     "frame": false,
     "width": 1100,
-    "height": 618,
+    "height": 800,
     "min_width": 990,
-    "min_height": 556,
+    "min_height": 700,
     "resizable": true,
     "position": "center"
   },
@@ -41,6 +41,7 @@
     "load-grunt-tasks": "~0.4.0"
   },
   "dependencies": {
-    "fs-extra": "~0.9.1"
+    "fs-extra": "~0.9.1",
+    "request": "~2.36.0"
   }
 }
