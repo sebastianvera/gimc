@@ -80,6 +80,7 @@ var app = app || {};
       var loadingHtml = '<div class="loader"></div>';
       this.$('#query').after(loadingHtml);
       this.$('#image-preview').hide();
+      this.$('#image-classes').empty();
     },
     stopLoading: function () {
       this.$('.loader').remove();

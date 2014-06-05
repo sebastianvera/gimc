@@ -9,7 +9,12 @@ var app = app || {};
       unique_name: '',
       url: ''
     },
+    initialize: function (options) {
+      this.set({images: [options]})
+    },
     addImage: function (image) {
+      app.hola = app.hola || [];
+      app.hola = app.hola.concat(this.toJSON());
       this.set({active: true});
       var imageExists = _.any(this.get('images'), function(i){
         return i.unique_name == image.unique_name;
@@ -24,7 +29,7 @@ var app = app || {};
       this.trigger("highlight", this);
     },
     remove: function() {
-      this.trigger('remove');
+      this.trigger('remove', this);
     },
     getFirstImage: function() {
       return _.first(this.get('images'));
@@ -38,18 +43,29 @@ var app = app || {};
     model: app.ImageClass,
     initialize: function(){
       this.on('add', this.deactivateCollection, this);
+      this.on('change:images', this.checkEmpty, this);
+      this.on('remove', this.hideModel);
+    },
+    hideModel: function (model) {
+      model.trigger('hide');
+    },
+    checkEmpty: function (model) {
+      if (model.imageSize() == 0) {
+        console.log("Removing Class "+model.get('name'));
+        this.remove(model);
+      }
     },
     classify: function (className, image) {
       this.unclassifyExisting(className, image);
 
       var imageClass = this.find(function(c){ return c.get('name') == className });
       if (imageClass) {
+        imageClass.addImage(image);
       } else {
         imageClass = new app.ImageClass(image);
         imageClass.set({name: className});
         this.push(imageClass);
       }
-      imageClass.addImage(image);
     },
     have: function (unique_name) {
     },
@@ -63,6 +79,7 @@ var app = app || {};
           return img.unique_name == image.unique_name;
         });
         if (hasImage) {
+          console.log("deleting image from class "+c.get('name'));
           var classImages = c.get('images');
           var filteredImages = _.without(classImages,
             _.findWhere(classImages, {unique_name: image.unique_name}))

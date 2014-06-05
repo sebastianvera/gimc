@@ -8,9 +8,28 @@ var app = app || {};
       className: 'class',
       template: _.template($('#template-image-class').html()),
       initialize: function () {
-        this.model.on('change', this.render, this);
+        // this.model.on('change:active', this.render, this);
+        this.model.on('change:images', this.updateSize, this);
+        this.model.on('change:active', this.updateActive, this);
+        this.model.on('hide', this.remove, this);
+      },
+      updateActive: function () {
+        if (this.model.get('active')) {
+          this.$el.addClass("active");
+        } else {
+          this.$el.removeClass("active");
+        }
+      },
+      updateSize: function () {
+        console.log("Update size: "+this.model.imageSize());
+        if (this.model.imageSize() > 0) {
+          this.$('span').html("Class "+this.model.get('name')+" - total: "+
+                              this.model.imageSize());
+        }
       },
       render: function () {
+        console.log("Rendered class view "+this.model.get('name'));
+        console.log("Images class "+this.model.get('name')+": "+this.model.get('images').length);
         if (this.model.get('images').length < 1) {
           this.$el.remove();
           return this;
@@ -34,11 +53,11 @@ var app = app || {};
     initialize: function() {
       this.collection.on('add', this.addOne, this);
       this.collection.on('add', this.checkSaveButton, this);
-      this.collection.on('reset', this.addAll, this);
-      this.collection.on('reset', this.checkSaveButton, this);
-      this.collection.on('remove', this.render, this);
-      this.collection.on('change', this.render, this);
+      this.collection.on('remove', this.remove, this)
       this.collection.on('highlight', this.highlight, this);
+    },
+    remove: function (model) {
+      this.collection.remove(model);
     },
     comparator: function (a1, a2) {
       return parseInt(a1.get('name')) < parseInt(a2.get('name'));
@@ -52,18 +71,20 @@ var app = app || {};
     },
     checkSaveButton: function () {
       if (this.collection.length > 0) {
+        console.log("enabled");
         $('#save-button').removeClass('disabled');
       } else {
+        console.log("disabled");
         $('#save-button').addClass('disabled');
       }
     },
     highlight: function (c) {
+      console.log("hightlight "+c.get('name'));
       this.collection.deactivateCollection(c);
-      this.render();
     },
     render: function() {
-      this.$el.empty();
-      this.addAll();
+      // this.$el.empty();
+      // this.addAll();
     },
     reset: function() {
       this.$el.empty();
