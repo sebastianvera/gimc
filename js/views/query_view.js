@@ -22,7 +22,7 @@ var client = require('./js/services/google-image');
         this.trigger('startLoading');
         var params = {
           keyword: this.inputValue(),
-          pages: 1
+          pages: 5
         }
         var _this = this;
         client.search(params, function (err, images) {
@@ -31,7 +31,11 @@ var client = require('./js/services/google-image');
             _this.trigger('stopLoading');
           } else {
             _this.trigger('stopLoading');
-            _this.trigger('newQuery', images);
+            var unique_images = _.unique(images, function(i){
+              return i.unique_name;
+            });
+            _this.trigger('newQuery', unique_images);
+            _this.$('#query').blur();
           }
         });
       },

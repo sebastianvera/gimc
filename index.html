@@ -11,6 +11,7 @@
       <div class="query-box">
           <input class="form-control input-lg" type="text" name="query" id="query" value="<%= query %>" placeholder="<%= placeholder %>" autofocus/>
       </div>
+      <h3 id="image-counter"></h3>
       <div id="image-preview" class="current_image">
       </div>
       <div class="classes" id="image-classes">
@@ -22,10 +23,8 @@
     </script>
 
     <script type="text/html" id="template-image-class">
-      <div class="class">
-        <span><%= name %></span>
-        <img src="<%= image_url %>" alt="<%= image_unique_name %>" />
-      </div>
+        <span> Class <%= model.get('name') %> - total: <%= model.imageSize() %></span>
+        <img src="<%= model.getFirstImage().url %>" alt="<%= model.getFirstImage().unique_name %>" />
     </script>
 
     <div id="app" class="content"></div>
@@ -42,9 +41,9 @@
 
 
     <!-- Backbone Models -->
-    <script src="js/models/image_class.js"></script>
     <script src="js/models/query.js"></script>
     <script src="js/models/image.js"></script>
+    <script src="js/models/image_class.js"></script>
 
     <!-- <script src="js/models/image.js"></script> -->
 

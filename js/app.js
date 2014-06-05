@@ -9,23 +9,44 @@ $(function () {
   Mousetrap.bind('f12', function () {
     win.showDevTools();
   });
-  var query = new app.Query();
-  var appView = new app.MainView();
-  appView.render();
+  app.appView = new app.MainView();
+  app.appView.render();
   Mousetrap.bind('right', function(){
     console.log("next image");
-    appView.nextImage();
+    app.appView.nextImage();
   });
   Mousetrap.bind('left', function () {
-    appView.prevImage();
-  });
-  Mousetrap.bind('enter', function(){
-    console.log("enter");
-  });
-  Mousetrap.bind('backspace', function(){
-    console.log("backspace");
+    app.appView.prevImage();
   });
   Mousetrap.bind('command+r', function(){
     win.reload();
+  });
+  // Get abecedary
+  Mousetrap.bind("1", function(){
+    app.appView.pressed("1");
+  });
+  Mousetrap.bind("2", function(){
+    app.appView.pressed("2");
+  });
+  Mousetrap.bind("3", function(){
+    app.appView.pressed("3");
+  });
+  Mousetrap.bind("4", function(){
+    app.appView.pressed("4");
+  });
+  Mousetrap.bind("5", function(){
+    app.appView.pressed("5");
+  });
+  Mousetrap.bind("6", function(){
+    app.appView.pressed("6");
+  });
+  Mousetrap.bind("7", function(){
+    app.appView.pressed("7");
+  });
+  Mousetrap.bind("8", function(){
+    app.appView.pressed("8");
+  });
+  Mousetrap.bind("9", function(){
+    app.appView.pressed("9");
   });
 });
