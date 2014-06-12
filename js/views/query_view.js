@@ -22,7 +22,7 @@ var client = require('./js/services/google-image');
         this.trigger('startLoading');
         var params = {
           keyword: this.inputValue(),
-          pages: 5
+          pages: 50
         }
         var _this = this;
         client.search(params, function (err, images) {

@@ -4,6 +4,6 @@ var app = app || {};
   'use strict';
 
   app.Image = Backbone.Model.extend({
-      
+
     });
 }());
