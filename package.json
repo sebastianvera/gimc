@@ -38,10 +38,13 @@
     "grunt-node-webkit-builder": "~0.1.21",
     "grunt-contrib-compass": "~0.8.0",
     "grunt-contrib-watch": "~0.6.1",
-    "load-grunt-tasks": "~0.4.0"
+    "load-grunt-tasks": "~0.4.0",
+    "gm": "~1.16.0",
+    "jsonfile": "~1.1.1"
   },
   "dependencies": {
     "fs-extra": "~0.9.1",
-    "request": "~2.36.0"
+    "request": "~2.36.0",
+    "lodash": "~2.4.1"
   }
 }
