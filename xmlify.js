@@ -1,7 +1,8 @@
 var jx = require('js2xmlparser'),
     fs = require('fs-extra'),
     jf = require('jsonfile'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    colors = require('colors');
 
 var path = './classes';
 var jsonPath = function(file) {
