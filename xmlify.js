@@ -26,9 +26,6 @@ jsons = _.filter(jsons, function(json){
   return json.match(/\.json/);
 });
 
-// use just first 20
-jsons = _.first(jsons, 20);
-
 // set xml options
 var xml_options = {
   declaration: {

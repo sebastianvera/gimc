@@ -26,7 +26,8 @@ module.exports = {
     images = [];
     URLS = [];
     for(i = 0; i < pages; i++) {
-      url = API_URL.replace('{{query}}', query.replace(/\s/g, '+')).replace('{{page}}', i);
+        var p_index = i + 10;
+      url = API_URL.replace('{{query}}', query.replace(/\s/g, '+')).replace('{{page}}', p_index);
       URLS.push(url);
     }
     var syncRequest = function () {

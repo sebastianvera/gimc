@@ -38,7 +38,7 @@ var jsonTemplate = {
     },
     "segmented" : 0,
     "object"    : [{
-        "name"      : "bottle",
+        "name"      : "cans",
         "pose"      : "Unspecified",
         "truncated" : 0,
         "difficult" : 0,
@@ -58,9 +58,6 @@ var chunksize = 50;
         if (err)
             console.log("There was an error with ".error+image.error, err);
         else {
-            var size = info.size;
-            var old_size = size;
-            var depth = info.depth;
             var jsonPath = info.path.replace('.jpg', '.json');
 
             var saveOrUpdateJSON = function(image, size, depth) {
@@ -78,7 +75,7 @@ var chunksize = 50;
                     }
                     var sameWidth = json.size.width == current.size.width &&
                         json.size.height == current.size.height;
-                    if (!_.isEqual(size, current.size) || depth != current.depth || !sameWidth) {
+                    if (!_.isEqual(info.size, current.size) || info.depth != current.depth || !sameWidth) {
                         json.size = _.extend({}, current.size);
                         json.size.depth = current.depth;
                         json.filename = image;
@@ -102,6 +99,7 @@ var chunksize = 50;
                // Resize
                if (size.width < 500 && size.height < 500){
                    console.log("The dimensions are below 500px, so can't resize".debug, image.info);
+                   callback(image);
                } else if (size.width > size.height) { //Resize by width
                    console.log("Resize".verbose, image.data);
                    gm(imagePath(image)).resize(500, null).write(imagePath(image), function(err) {
@@ -124,11 +122,11 @@ var chunksize = 50;
            }
 
            // Image Logic
-           if (size.width === 500 || size.height === 500) {
-               saveOrUpdateJSON(image, size, depth);
+           if (info.size.width === 500 || info.size.height === 500) {
+               saveOrUpdateJSON(image, info.size, info.depth);
            }
            else{
-               resize(image, saveOrUpdateJSON, size);
+               resize(image, saveOrUpdateJSON, info.size);
            }
            i++;
            if(i == images.length) return; // we're done.
