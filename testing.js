@@ -2,7 +2,7 @@ var exec = require('child_process').exec;
 var _ = require('lodash');
 
 function execute(command, callback){
-        exec(command, function(error, stdout, stderr){ callback(stdout); });
+    exec(command, function(error, stdout, stderr){ callback(stdout); });
 };
 
 var image = 'bottle1.jpg';
